@@ -3,39 +3,39 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 
-// TODO: Replace src, client, and category with Luca's actual project videos
+// TODO: Replace all src, client, category with Luca's actual project videos
 const projects = [
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", client: "[Client Name]", category: "Brand Film", span: "col-span-2" },
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", client: "[Client Name]", category: "Social Campaign", span: "col-span-1" },
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", client: "[Client Name]", category: "Product Showcase", span: "col-span-1" },
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", client: "[Client Name]", category: "Video Editing", span: "col-span-1" },
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", client: "[Client Name]", category: "Event Coverage", span: "col-span-2" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",    client: "[Client Name]", category: "Brand Film",       cols: "md:col-span-2" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",   client: "[Client Name]", category: "Social Campaign",   cols: "md:col-span-1" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",     client: "[Client Name]", category: "Product Showcase",   cols: "md:col-span-1" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",       client: "[Client Name]", category: "Video Edit",         cols: "md:col-span-1" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",client: "[Client Name]", category: "Event Coverage",     cols: "md:col-span-2" },
 ];
 
-function VideoCard({ p, delay }: { p: typeof projects[0]; delay: number }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [active, setActive] = useState(false);
+function Card({ p, delay }: { p: typeof projects[0]; delay: number }) {
+  const vidRef = useRef<HTMLVideoElement>(null);
+  const [on, setOn] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`group relative overflow-hidden bg-[#1C1E1A] aspect-video cursor-pointer ${p.span}`}
-      onMouseEnter={() => { setActive(true); videoRef.current?.play().catch(() => {}); }}
-      onMouseLeave={() => { setActive(false); if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; } }}
+      transition={{ duration: 0.7, delay }}
+      className={`group relative overflow-hidden bg-[#1A1A1A] aspect-video cursor-pointer ${p.cols}`}
+      onMouseEnter={() => { setOn(true); vidRef.current?.play().catch(() => {}); }}
+      onMouseLeave={() => { setOn(false); if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; } }}
     >
       <video
-        ref={videoRef}
+        ref={vidRef}
         src={p.src}
         muted loop playsInline preload="metadata"
-        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${active ? "scale-105 opacity-100" : "scale-100 opacity-70"}`}
+        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${on ? "scale-105 opacity-100" : "opacity-60"}`}
       />
-      <div className={`absolute inset-0 bg-gradient-to-t from-[#0C0D0B] via-transparent to-transparent transition-opacity duration-500 ${active ? "opacity-60" : "opacity-100"}`} />
-      <div className={`absolute bottom-0 left-0 right-0 p-6 transition-all duration-400 ${active ? "translate-y-0 opacity-100" : "translate-y-2 opacity-70"}`}>
-        <p className="font-[family-name:var(--font-body)] text-[10px] text-[#CDB07C] tracking-[0.25em] uppercase mb-1">{p.category}</p>
-        <p className="font-[family-name:var(--font-display)] text-lg font-light text-[#E4DDD2]">{p.client}</p>
+      <div className={`absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/90 to-transparent transition-opacity duration-500 ${on ? "opacity-50" : "opacity-100"}`} />
+      <div className={`absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300 ${on ? "translate-y-0" : "translate-y-1"}`}>
+        <p className="font-[family-name:var(--font-body)] text-[10px] text-[#C9A55A] tracking-[0.22em] uppercase mb-1">{p.category}</p>
+        <p className="font-[family-name:var(--font-display)] text-lg font-light text-[#EDEDE8]">{p.client}</p>
       </div>
     </motion.div>
   );
@@ -43,29 +43,32 @@ function VideoCard({ p, delay }: { p: typeof projects[0]; delay: number }) {
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-40 max-w-6xl mx-auto px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.8 }}
-        className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8"
-      >
-        <div>
-          <p className="font-[family-name:var(--font-body)] text-[11px] text-[#5A5754] tracking-[0.3em] uppercase mb-6">Our Work</p>
-          <h2 className="font-[family-name:var(--font-display)] font-light text-[#E4DDD2] leading-[1.05]"
-            style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)" }}>
-            Hover to see<br />
-            <em>it come alive.</em>
-          </h2>
-        </div>
-        <p className="font-[family-name:var(--font-body)] text-sm text-[#5A5754] max-w-[260px] leading-relaxed">
-          Every project built around one goal — content that moves people to act.
-        </p>
-      </motion.div>
+    <section id="portfolio" className="py-28 bg-[#0D0D0D]">
+      <div className="max-w-[1100px] mx-auto px-6 lg:px-10">
 
-      <div className="grid grid-cols-3 gap-3">
-        {projects.map((p, i) => <VideoCard key={i} p={p} delay={i * 0.1} />)}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7 }}
+          className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
+        >
+          <div>
+            <p className="font-[family-name:var(--font-body)] text-[11px] text-[#6B6B6B] tracking-[0.28em] uppercase mb-4">Our Work</p>
+            <h2 className="font-[family-name:var(--font-display)] font-light text-[#EDEDE8] leading-[1.06]"
+              style={{ fontSize: "clamp(2rem, 3.8vw, 3.2rem)" }}>
+              Hover to see <em>it come alive.</em>
+            </h2>
+          </div>
+          <p className="font-[family-name:var(--font-body)] text-sm text-[#4a4a4a] max-w-[240px] leading-relaxed">
+            Content built to move people, not just fill a feed.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {projects.map((p, i) => <Card key={i} p={p} delay={i * 0.08} />)}
+        </div>
+
       </div>
     </section>
   );

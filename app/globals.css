@@ -1,36 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg:        #111210;
-  --color-surface:   #1C1E1A;
-  --color-deep:      #0C0D0B;
-  --color-brass:     #B8965A;
-  --color-brass-lt:  #CDB07C;
-  --color-ink:       #E4DDD2;
-  --color-smoke:     #9A9490;
-  --color-ghost:     #5A5754;
-  --color-rule:      rgba(255,255,255,0.07);
-  --font-display:    var(--font-display);
-  --font-body:       var(--font-body);
+  --color-bg:       #0D0D0D;
+  --color-surface:  #161616;
+  --color-card:     #1A1A1A;
+  --color-gold:     #C9A55A;
+  --color-gold-dim: rgba(201,165,90,0.12);
+  --color-ink:      #EDEDE8;
+  --color-muted:    #6B6B6B;
+  --color-faint:    #333333;
+  --color-rule:     rgba(255,255,255,0.06);
+  --font-display:   var(--font-display);
+  --font-body:      var(--font-body);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
-  background: #111210;
-  color: #E4DDD2;
-  font-family: var(--font-body), 'Jost', sans-serif;
+  background: #0D0D0D;
+  color: #EDEDE8;
+  font-family: var(--font-body), sans-serif;
   font-weight: 300;
   font-size: 15px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
-::selection { background: #CDB07C; color: #111210; }
-
+::selection { background: #C9A55A; color: #0D0D0D; }
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #111210; }
-::-webkit-scrollbar-thumb { background: #2a2a28; }
+::-webkit-scrollbar-track { background: #0D0D0D; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; }
