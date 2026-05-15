@@ -1,74 +1,157 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useRef, useState } from "react";
-
-// TODO: Replace all src, client, category with Luca's actual project videos
-const projects = [
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",    client: "[Client Name]", category: "Brand Film",       cols: "md:col-span-2" },
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",   client: "[Client Name]", category: "Social Campaign",   cols: "md:col-span-1" },
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",     client: "[Client Name]", category: "Product Showcase",   cols: "md:col-span-1" },
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",       client: "[Client Name]", category: "Video Edit",         cols: "md:col-span-1" },
-  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",client: "[Client Name]", category: "Event Coverage",     cols: "md:col-span-2" },
-];
-
-function Card({ p, delay }: { p: typeof projects[0]; delay: number }) {
-  const vidRef = useRef<HTMLVideoElement>(null);
-  const [on, setOn] = useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.7, delay }}
-      className={`group relative overflow-hidden bg-[#1A1A1A] aspect-video cursor-pointer ${p.cols}`}
-      onMouseEnter={() => { setOn(true); vidRef.current?.play().catch(() => {}); }}
-      onMouseLeave={() => { setOn(false); if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0; } }}
-    >
-      <video
-        ref={vidRef}
-        src={p.src}
-        muted loop playsInline preload="metadata"
-        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${on ? "scale-105 opacity-100" : "opacity-60"}`}
-      />
-      <div className={`absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/90 to-transparent transition-opacity duration-500 ${on ? "opacity-50" : "opacity-100"}`} />
-      <div className={`absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300 ${on ? "translate-y-0" : "translate-y-1"}`}>
-        <p className="font-[family-name:var(--font-body)] text-[10px] text-[#C9A55A] tracking-[0.22em] uppercase mb-1">{p.category}</p>
-        <p className="font-[family-name:var(--font-display)] text-lg font-light text-[#EDEDE8]">{p.client}</p>
-      </div>
-    </motion.div>
-  );
-}
+import { useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 
 export default function Portfolio() {
-  return (
-    <section id="portfolio" className="py-28 bg-[#0D0D0D]">
-      <div className="max-w-[1100px] mx-auto px-6 lg:px-10">
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    dragFree: true,
+  });
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7 }}
-          className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
+  const prev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const next = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  return (
+    <section
+      id="portfolio"
+      style={{
+        background: "#f9f9f6",
+        padding: "80px 0",
+        borderTop: "1px solid #d7d0c8",
+        overflow: "hidden",
+      }}
+    >
+      {/* Header */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", marginBottom: 40 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 16,
+            marginBottom: 8,
+          }}
         >
           <div>
-            <p className="font-[family-name:var(--font-body)] text-[11px] text-[#6B6B6B] tracking-[0.28em] uppercase mb-4">Our Work</p>
-            <h2 className="font-[family-name:var(--font-display)] font-light text-[#EDEDE8] leading-[1.06]"
-              style={{ fontSize: "clamp(2rem, 3.8vw, 3.2rem)" }}>
-              Hover to see <em>it come alive.</em>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 600,
+                fontSize: 11,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#666",
+                marginBottom: 12,
+              }}
+            >
+              PORTFOLIO
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2rem, 4vw, 3.2rem)",
+                color: "#1c1c1c",
+                lineHeight: 1.05,
+              }}
+            >
+              See What Our Top Performing Emails Look Like
             </h2>
           </div>
-          <p className="font-[family-name:var(--font-body)] text-sm text-[#4a4a4a] max-w-[240px] leading-relaxed">
-            Content built to move people, not just fill a feed.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          {projects.map((p, i) => <Card key={i} p={p} delay={i * 0.08} />)}
+          {/* Arrows */}
+          <div style={{ display: "flex", gap: 8 }}>
+            <button
+              onClick={prev}
+              aria-label="Previous"
+              style={{
+                width: 40,
+                height: 40,
+                border: "1px solid #d7d0c8",
+                background: "#fff",
+                borderRadius: 4,
+                cursor: "pointer",
+                fontSize: 18,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#1c1c1c",
+              }}
+            >
+              ←
+            </button>
+            <button
+              onClick={next}
+              aria-label="Next"
+              style={{
+                width: 40,
+                height: 40,
+                border: "1px solid #d7d0c8",
+                background: "#fff",
+                borderRadius: 4,
+                cursor: "pointer",
+                fontSize: 18,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#1c1c1c",
+              }}
+            >
+              →
+            </button>
+          </div>
         </div>
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 400,
+            fontSize: 14,
+            color: "#888",
+          }}
+        >
+          Scroll to see the full email
+        </p>
+      </div>
 
+      {/* Embla carousel */}
+      <div ref={emblaRef} style={{ overflow: "hidden" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 16,
+            paddingLeft: "max(24px, calc((100vw - 1100px) / 2 + 24px))",
+            paddingRight: 24,
+            touchAction: "pan-y",
+          }}
+        >
+          {[1, 2, 3, 4].map((n) => (
+            <div
+              key={n}
+              style={{
+                flexShrink: 0,
+                width: 280,
+                height: 500,
+                background: "#d7d0c8",
+                borderRadius: 8,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                border: "1px solid #c8c1b8",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 13,
+                  color: "#888",
+                }}
+              >
+                [Email Screenshot]
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

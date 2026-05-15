@@ -1,58 +1,201 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-
-const steps = [
-  { num: "01", title: "Discovery",   line: "We learn your brand, audience, and goals before anything else." },
-  { num: "02", title: "Creative",    line: "Scripts, concepts, and platform strategy locked in before we shoot." },
-  { num: "03", title: "Production",  line: "We shoot, edit, grade, and deliver — fast and polished." },
-  { num: "04", title: "Growth",      line: "We post, track, and optimise. Content that keeps compounding." },
+const phases = [
+  {
+    phase: "Phase 1 — Research",
+    days: "Days 1–7",
+    body: "We audit everything and build a custom roadmap.",
+    bullets: [
+      "Deep Klaviyo audit",
+      "Deliverability & list health analysis",
+      "Customer, product, and competitor insights",
+      "Build your 30-day revenue plan",
+    ],
+  },
+  {
+    phase: "Phase 2 — Implement",
+    days: "Days 7–30",
+    body: "We lay the foundation and start sending.",
+    bullets: [
+      "Create + install high-converting sign-up forms",
+      "Write, design & launch 6–10 essential flows",
+      "Start testing campaigns + basic segmentation",
+    ],
+  },
+  {
+    phase: "Phase 3 — Scale",
+    days: "Days 30–45",
+    body: "With flows running, we ramp up revenue.",
+    bullets: [
+      "Weekly campaigns with fresh angles",
+      "Build advanced segmentation + A/B testing",
+      "Start pushing into SMS if applicable",
+    ],
+  },
+  {
+    phase: "Phase 4 — Evolve",
+    days: "Days 45+",
+    body: "We optimize, experiment, and double down on what works.",
+    bullets: [
+      "Ongoing flow refinement",
+      "Weekly tests: offers, creative, cadence",
+      "Monthly reporting + strategy shifts based on data",
+    ],
+  },
 ];
 
 export default function Process() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
   return (
-    <section id="process" ref={ref} className="py-28 bg-[#0D0D0D]">
-      <div className="max-w-[1100px] mx-auto px-6 lg:px-10">
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
+    <section
+      id="process"
+      style={{
+        background: "#f9f9f6",
+        padding: "80px 0",
+        borderTop: "1px solid #d7d0c8",
+      }}
+    >
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        {/* Header */}
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 600,
+            fontSize: 11,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#666",
+            marginBottom: 12,
+          }}
         >
-          <p className="font-[family-name:var(--font-body)] text-[11px] text-[#6B6B6B] tracking-[0.28em] uppercase mb-4">How It Works</p>
-          <h2 className="font-[family-name:var(--font-display)] font-light text-[#EDEDE8] leading-[1.06]"
-            style={{ fontSize: "clamp(2rem, 3.8vw, 3.2rem)" }}>
-            Simple process, <em>serious results.</em>
-          </h2>
-        </motion.div>
+          HOW WE WORK
+        </p>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2rem, 4vw, 3.2rem)",
+            color: "#1c1c1c",
+            marginBottom: 8,
+            lineHeight: 1.05,
+          }}
+        >
+          The RISE Method
+        </h2>
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 400,
+            fontSize: 16,
+            color: "#666",
+            marginBottom: 48,
+            maxWidth: 560,
+          }}
+        >
+          Our 4-phase system for launching, optimizing, and scaling email &amp; SMS for high-growth brands.
+        </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-white/[0.06]">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.num}
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group pt-10 pb-10 pr-8 border-b sm:border-b-0 border-r-0 lg:border-r border-white/[0.06] last:border-r-0 hover:bg-[#161616] px-3 -mx-3 lg:mx-0 lg:px-0 lg:pr-8 transition-colors duration-300"
+        {/* 4-card grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: 20,
+          }}
+        >
+          {phases.map((p, i) => (
+            <div
+              key={i}
+              style={{
+                background: "#fff",
+                border: "1px solid #d7d0c8",
+                borderRadius: 8,
+                padding: 24,
+              }}
             >
-              <span className="font-[family-name:var(--font-body)] text-[10px] text-[#333333] tracking-[0.25em] block mb-8 group-hover:text-[#C9A55A] transition-colors duration-300">
-                {s.num}
-              </span>
-              <h3 className="font-[family-name:var(--font-display)] text-xl font-light text-[#EDEDE8] mb-3">
-                {s.title}
-              </h3>
-              <p className="font-[family-name:var(--font-body)] text-sm text-[#4a4a4a] leading-relaxed">
-                {s.line}
+              <p
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 600,
+                  fontSize: 12,
+                  color: "#888",
+                  marginBottom: 4,
+                  letterSpacing: "0.05em",
+                }}
+              >
+                {p.days}
               </p>
-            </motion.div>
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "1.35rem",
+                  color: "#1c1c1c",
+                  marginBottom: 10,
+                  lineHeight: 1.2,
+                }}
+              >
+                {p.phase}
+              </h3>
+              <p
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 400,
+                  fontSize: 14,
+                  color: "#555",
+                  marginBottom: 16,
+                  lineHeight: 1.55,
+                }}
+              >
+                {p.body}
+              </p>
+              <ul
+                style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 8,
+                }}
+              >
+                {p.bullets.map((b, j) => (
+                  <li
+                    key={j}
+                    style={{
+                      display: "flex",
+                      gap: 8,
+                      alignItems: "flex-start",
+                      fontFamily: "var(--font-body)",
+                      fontWeight: 400,
+                      fontSize: 13,
+                      color: "#444",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    <span style={{ color: "#1c1c1c", fontWeight: 700, flexShrink: 0 }}>—</span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
 
+        {/* CTA */}
+        <div style={{ textAlign: "center", marginTop: 40 }}>
+          <a
+            href="#contact"
+            style={{
+              display: "inline-block",
+              background: "#000",
+              color: "#fff",
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: 15,
+              padding: "14px 32px",
+              borderRadius: 9999,
+              textDecoration: "none",
+            }}
+          >
+            Book a Consultation Call
+          </a>
+        </div>
       </div>
     </section>
   );

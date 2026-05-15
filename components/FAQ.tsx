@@ -1,80 +1,171 @@
 "use client";
 
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const faqs = [
-  { q: "What types of businesses do you work with?",  a: "Brands of all sizes — local Boston businesses, e-commerce, fitness, restaurants, and real estate. If you need video or social growth, we can help." },
-  { q: "How long does a typical project take?",       a: "Most video projects are delivered within 5–7 business days after the shoot. Social media results show within 30–60 days." },
-  { q: "Do you only work in Boston?",                 a: "Boston is home base, but we travel for the right projects. Reach out and we'll figure it out." },
-  { q: "What's included in social media management?", a: "Strategy, content production, scheduling, community management, and monthly performance reports. Everything." },
-  { q: "Can I send my own footage for editing?",      a: "Yes. Standalone editing packages are available — color grading, motion graphics, and sound design included." },
-  { q: "How do we get started?",                      a: "Book a free discovery call. No commitment — just a conversation about what you need." },
+  {
+    q: "How is Mail Mosaic different?",
+    a: "We operate as a true extension of your team. Unlike typical agencies, we offer founder-led strategy, daily communication, and hands-on execution — not templates and interns.",
+  },
+  {
+    q: "What does Mail Mosaic actually do?",
+    a: "We manage your full email & SMS marketing: flows, campaigns, list segmentation, deliverability, and reporting. Everything from strategy to execution.",
+  },
+  {
+    q: "What kind of results can I expect?",
+    a: "Most clients see meaningful revenue lift within the first 30 days. Results vary by brand, but our case studies show consistent 2–5x returns on investment.",
+  },
+  {
+    q: "How often do you send campaigns?",
+    a: "Typically 3–4 per week, adjusted based on your list size, segment health, and seasonal strategy.",
+  },
+  {
+    q: "How involved do I need to be?",
+    a: "Minimal. We handle the strategy, writing, design, and execution. We just need your brand assets and approvals.",
+  },
 ];
 
-function Item({ faq, i }: { faq: typeof faqs[0]; i: number }) {
+function FAQItem({ faq, i }: { faq: (typeof faqs)[0]; i: number }) {
   const [open, setOpen] = useState(false);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-20px" }}
-      transition={{ duration: 0.5, delay: i * 0.06 }}
-      className="border-b border-white/[0.06]"
+    <div
+      style={{
+        borderBottom: "1px solid #d7d0c8",
+      }}
     >
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-6 text-left group">
-        <span className="font-[family-name:var(--font-body)] text-sm text-[#6B6B6B] group-hover:text-[#EDEDE8] transition-colors duration-200 pr-8">
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "20px 0",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          textAlign: "left",
+          gap: 16,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 600,
+            fontSize: 15,
+            color: "#1c1c1c",
+            lineHeight: 1.4,
+          }}
+        >
           {faq.q}
         </span>
-        <span className={`text-lg flex-none transition-all duration-300 ${open ? "text-[#C9A55A] rotate-45" : "text-[#333333]"}`}>+</span>
+        <span
+          style={{
+            fontSize: 22,
+            color: "#666",
+            flexShrink: 0,
+            transform: open ? "rotate(45deg)" : "rotate(0deg)",
+            transition: "transform 0.25s",
+            lineHeight: 1,
+          }}
+        >
+          +
+        </span>
       </button>
-      <AnimatePresence>
+
+      <AnimatePresence initial={false}>
         {open && (
           <motion.div
+            key="content"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: "easeInOut" }}
-            className="overflow-hidden"
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            style={{ overflow: "hidden" }}
           >
-            <p className="font-[family-name:var(--font-body)] text-sm text-[#4a4a4a] leading-relaxed pb-6">{faq.a}</p>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 400,
+                fontSize: 15,
+                color: "#555",
+                lineHeight: 1.7,
+                paddingBottom: 20,
+              }}
+            >
+              {faq.a}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
 export default function FAQ() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
   return (
-    <section id="faq" ref={ref} className="py-28 bg-[#161616]">
-      <div className="max-w-[1100px] mx-auto px-6 lg:px-10">
-        <div className="grid md:grid-cols-[380px_1fr] gap-16 lg:gap-24 items-start">
+    <section
+      id="faq"
+      style={{
+        background: "#f9f9f6",
+        padding: "80px 0",
+        borderTop: "1px solid #d7d0c8",
+      }}
+    >
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        {/* Header */}
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 600,
+            fontSize: 11,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#666",
+            marginBottom: 12,
+          }}
+        >
+          FAQ
+        </p>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2rem, 4vw, 3.2rem)",
+            color: "#1c1c1c",
+            marginBottom: 40,
+            lineHeight: 1.05,
+          }}
+        >
+          Frequently Asked Questions
+        </h2>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
-            className="md:sticky md:top-28"
+        {/* Accordion */}
+        <div style={{ maxWidth: 720 }}>
+          {faqs.map((f, i) => (
+            <FAQItem key={i} faq={f} i={i} />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div style={{ marginTop: 40 }}>
+          <a
+            href="#contact"
+            style={{
+              display: "inline-block",
+              background: "#000",
+              color: "#fff",
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: 15,
+              padding: "14px 32px",
+              borderRadius: 9999,
+              textDecoration: "none",
+            }}
           >
-            <p className="font-[family-name:var(--font-body)] text-[11px] text-[#6B6B6B] tracking-[0.28em] uppercase mb-4">FAQ</p>
-            <h2 className="font-[family-name:var(--font-display)] font-light text-[#EDEDE8] leading-[1.06] mb-6"
-              style={{ fontSize: "clamp(2rem, 3.8vw, 3.2rem)" }}>
-              Questions <em>answered.</em>
-            </h2>
-            <a href="#contact"
-              className="font-[family-name:var(--font-body)] text-[11px] text-[#4a4a4a] hover:text-[#C9A55A] tracking-[0.18em] uppercase transition-colors duration-200">
-              More questions? Get in touch →
-            </a>
-          </motion.div>
-
-          <div>
-            {faqs.map((f, i) => <Item key={i} faq={f} i={i} />)}
-          </div>
-
+            Book a Consultation Call
+          </a>
         </div>
       </div>
     </section>

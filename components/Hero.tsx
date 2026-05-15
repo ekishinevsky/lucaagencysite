@@ -1,53 +1,120 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
-
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    videoRef.current?.play().catch(() => {});
-  }, []);
-
   return (
-    <section className="relative h-screen min-h-[600px] flex items-end overflow-hidden">
-      {/* TODO: Replace src with Luca's hero reel */}
-      <video
-        ref={videoRef}
-        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-        autoPlay muted loop playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/40 to-transparent" />
-      <div className="absolute inset-0 bg-[#0D0D0D]/20" />
+    <section
+      style={{
+        background: "#f9f9f6",
+        padding: "80px 0 64px",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          padding: "0 24px",
+          textAlign: "center",
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2.8rem, 6vw, 5rem)",
+            lineHeight: 1.05,
+            color: "#1c1c1c",
+            marginBottom: 24,
+            maxWidth: 800,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          Unlock $30K to $200K+ Revenue Growth with High-Impact Email Marketing
+        </h1>
 
-      <div className="relative z-10 w-full">
-        <div className="max-w-[1100px] mx-auto px-6 lg:px-10 pb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 400,
+            fontSize: 18,
+            color: "#666",
+            maxWidth: 560,
+            margin: "0 auto 40px",
+            lineHeight: 1.7,
+          }}
+        >
+          At Mail Mosaic, we&apos;re piecing together your retention revenue through smart, data-driven email marketing.
+        </p>
+
+        <a
+          href="#contact"
+          style={{
+            display: "inline-block",
+            background: "#000",
+            color: "#fff",
+            fontFamily: "var(--font-body)",
+            fontWeight: 600,
+            fontSize: 15,
+            padding: "14px 32px",
+            borderRadius: 9999,
+            textDecoration: "none",
+            marginBottom: 56,
+          }}
+        >
+          Book a Consultation Call
+        </a>
+
+        {/* Trusted by logos */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 16,
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: 12,
+              color: "#666",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
           >
-            <p className="font-[family-name:var(--font-body)] text-[11px] text-[#6B6B6B] tracking-[0.28em] uppercase mb-6">
-              Boston-Based Creative Agency
-            </p>
-            <h1 className="font-[family-name:var(--font-display)] font-light text-[#EDEDE8] leading-[1.04] mb-10"
-              style={{ fontSize: "clamp(2.6rem, 5.5vw, 5.2rem)" }}>
-              We make your brand<br />
-              <em className="text-[#C9A55A]">impossible</em> to ignore.
-            </h1>
-            <div className="flex flex-wrap gap-4">
-              <a href="#portfolio"
-                className="font-[family-name:var(--font-body)] text-[11px] tracking-[0.18em] uppercase bg-[#C9A55A] text-[#0D0D0D] px-8 py-3.5 hover:bg-[#EDEDE8] transition-colors duration-300">
-                See Our Work
-              </a>
-              <a href="#contact"
-                className="font-[family-name:var(--font-body)] text-[11px] tracking-[0.18em] uppercase border border-white/10 text-[#6B6B6B] px-8 py-3.5 hover:border-[rgba(201,165,90,0.4)] hover:text-[#C9A55A] transition-all duration-300">
-                Book a Call
-              </a>
-            </div>
-          </motion.div>
+            Trusted by
+          </p>
+          <div
+            style={{
+              display: "flex",
+              gap: 16,
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            {[1, 2, 3, 4, 5].map((n) => (
+              <div
+                key={n}
+                style={{
+                  width: 120,
+                  height: 44,
+                  background: "#d7d0c8",
+                  borderRadius: 6,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: 11,
+                    color: "#999",
+                  }}
+                >
+                  [Logo]
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

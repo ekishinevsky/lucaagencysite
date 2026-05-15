@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
-  { label: "Work", href: "#portfolio" },
-  { label: "Services", href: "#services" },
+  { label: "Why Us?", href: "#why-us" },
+  { label: "Case Studies", href: "#case-studies" },
   { label: "Process", href: "#process" },
   { label: "About", href: "#about" },
+  { label: "Portfolio", href: "#portfolio" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export default function Nav() {
@@ -15,65 +16,162 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
+    const handler = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
   }, []);
 
   return (
-    <>
-      <motion.nav
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-[#0D0D0D]/95 backdrop-blur-md border-b border-white/[0.06]" : ""
-        }`}
+    <nav
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        background: "#fff",
+        borderBottom: scrolled ? "1px solid #d7d0c8" : "1px solid transparent",
+        transition: "border-color 0.2s",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          padding: "0 24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: 64,
+        }}
       >
-        <div className="max-w-[1100px] mx-auto px-6 lg:px-10 h-[68px] flex items-center justify-between">
-          {/* TODO: swap with <img src="/logo.svg" className="h-7" /> */}
-          <a href="#" className="font-[family-name:var(--font-display)] text-[#EDEDE8] text-xl font-light tracking-[0.18em] uppercase">
-            Luca Agency
-          </a>
+        {/* Logo */}
+        <a
+          href="/"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 22,
+            letterSpacing: "0.04em",
+            color: "#1c1c1c",
+            textDecoration: "none",
+          }}
+        >
+          MAIL MOSAIC
+        </a>
 
-          <div className="hidden md:flex items-center gap-9">
-            {links.map((l) => (
-              <a key={l.label} href={l.href}
-                className="font-[family-name:var(--font-body)] text-[11px] text-[#6B6B6B] hover:text-[#EDEDE8] tracking-[0.18em] uppercase transition-colors duration-200">
-                {l.label}
-              </a>
-            ))}
-            <a href="#contact"
-              className="font-[family-name:var(--font-body)] text-[11px] tracking-[0.18em] uppercase border border-[rgba(201,165,90,0.5)] text-[#C9A55A] hover:bg-[#C9A55A] hover:text-[#0D0D0D] px-5 py-2 transition-all duration-300">
-              Book a Call
+        {/* Desktop links */}
+        <div className="nav-links-desktop">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 400,
+                fontSize: 14,
+                color: "#1c1c1c",
+                textDecoration: "none",
+              }}
+            >
+              {l.label}
             </a>
-          </div>
-
-          <button onClick={() => setOpen(!open)} className="md:hidden p-2 flex flex-col gap-[5px]">
-            <span className={`block w-5 h-px bg-[#EDEDE8] transition-all duration-300 ${open ? "rotate-45 translate-y-[6px]" : ""}`} />
-            <span className={`block w-5 h-px bg-[#EDEDE8] transition-all duration-300 ${open ? "opacity-0" : ""}`} />
-            <span className={`block w-5 h-px bg-[#EDEDE8] transition-all duration-300 ${open ? "-rotate-45 -translate-y-[6px]" : ""}`} />
-          </button>
+          ))}
         </div>
-      </motion.nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-[#0D0D0D] flex flex-col items-center justify-center gap-10 md:hidden">
-            {links.map((l) => (
-              <a key={l.label} href={l.href} onClick={() => setOpen(false)}
-                className="font-[family-name:var(--font-display)] text-4xl font-light text-[#EDEDE8] tracking-wide italic">
-                {l.label}
-              </a>
-            ))}
-            <a href="#contact" onClick={() => setOpen(false)}
-              className="font-[family-name:var(--font-body)] text-[11px] tracking-[0.18em] uppercase border border-[rgba(201,165,90,0.5)] text-[#C9A55A] px-8 py-3 mt-4">
-              Book a Call
+        {/* CTA */}
+        <a
+          href="#contact"
+          className="nav-cta-desktop"
+          style={{
+            background: "#000",
+            color: "#fff",
+            fontFamily: "var(--font-body)",
+            fontWeight: 600,
+            fontSize: 13,
+            padding: "10px 20px",
+            borderRadius: 9999,
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Book a Consultation Call
+        </a>
+
+        {/* Mobile hamburger */}
+        <button
+          className="nav-hamburger"
+          onClick={() => setOpen(!open)}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: 8,
+          }}
+          aria-label="Toggle menu"
+        >
+          <span style={{ display: "block", width: 24, height: 2, background: "#1c1c1c", marginBottom: 5 }} />
+          <span style={{ display: "block", width: 24, height: 2, background: "#1c1c1c", marginBottom: 5 }} />
+          <span style={{ display: "block", width: 24, height: 2, background: "#1c1c1c" }} />
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div
+          style={{
+            background: "#fff",
+            borderTop: "1px solid #d7d0c8",
+            padding: "16px 24px 24px",
+          }}
+        >
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              style={{
+                display: "block",
+                fontFamily: "var(--font-body)",
+                fontWeight: 400,
+                fontSize: 15,
+                color: "#1c1c1c",
+                textDecoration: "none",
+                padding: "10px 0",
+                borderBottom: "1px solid #f0ede8",
+              }}
+            >
+              {l.label}
             </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setOpen(false)}
+            style={{
+              display: "inline-block",
+              marginTop: 16,
+              background: "#000",
+              color: "#fff",
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: 13,
+              padding: "10px 20px",
+              borderRadius: 9999,
+              textDecoration: "none",
+            }}
+          >
+            Book a Consultation Call
+          </a>
+        </div>
+      )}
+
+      <style>{`
+        .nav-links-desktop { display: flex; gap: 28px; align-items: center; }
+        .nav-cta-desktop { display: inline-block; }
+        .nav-hamburger { display: none; }
+        @media (max-width: 768px) {
+          .nav-links-desktop { display: none !important; }
+          .nav-cta-desktop { display: none !important; }
+          .nav-hamburger { display: block !important; }
+        }
+      `}</style>
+    </nav>
   );
 }

@@ -1,12 +1,11 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
 import WhyUs from "@/components/WhyUs";
-import Portfolio from "@/components/Portfolio";
-import Results from "@/components/Results";
+import CaseStudies from "@/components/CaseStudies";
 import Process from "@/components/Process";
 import About from "@/components/About";
-import Testimonials from "@/components/Testimonials";
+import Portfolio from "@/components/Portfolio";
+import FitCheck from "@/components/FitCheck";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -17,13 +16,12 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Services />
         <WhyUs />
-        <Portfolio />
-        <Results />
+        <CaseStudies />
         <Process />
         <About />
-        <Testimonials />
+        <Portfolio />
+        <FitCheck />
         <FAQ />
         <Contact />
       </main>

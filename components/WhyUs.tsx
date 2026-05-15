@@ -1,79 +1,175 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-
 const rows = [
-  "Dedicated point of contact",
-  "In-house production team",
-  "Strategy included every package",
-  "Social media growth built-in",
-  "Turnaround under 5 business days",
-  "Unlimited revisions",
-  "Boston-based, available same day",
+  {
+    other: "Feels distant, outsourced, and hard to reach",
+    us: "Feels like an in-house team, not an outsourced agency",
+  },
+  {
+    other: "Slow, spotty communication and unclear reporting (if any)",
+    us: "Daily communication + weekly/monthly KPI reporting",
+  },
+  {
+    other: "Inconsistent campaigns, often reused or off-brand",
+    us: "3–4 handcrafted campaigns weekly, built for performance and not discounts",
+  },
+  {
+    other: "Junior-led execution with little testing or strategic input",
+    us: "Founder-led strategy with proactive testing and support",
+  },
+  {
+    other: "One-size-fits-all tactics with no real connection to your brand",
+    us: "Every decision backed by data, but built around your brand voice and goals",
+  },
 ];
 
 export default function WhyUs() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
   return (
-    <section id="why-us" ref={ref} className="py-28 bg-[#161616]">
-      <div className="max-w-[1100px] mx-auto px-6 lg:px-10">
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
+    <section
+      id="why-us"
+      style={{
+        background: "#f9f9f6",
+        padding: "80px 0",
+        borderTop: "1px solid #d7d0c8",
+      }}
+    >
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        {/* Header */}
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 600,
+            fontSize: 11,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#666",
+            marginBottom: 12,
+          }}
         >
-          <p className="font-[family-name:var(--font-body)] text-[11px] text-[#6B6B6B] tracking-[0.28em] uppercase mb-4">
-            The Difference
-          </p>
-          <h2 className="font-[family-name:var(--font-display)] font-light text-[#EDEDE8] leading-[1.06]"
-            style={{ fontSize: "clamp(2rem, 3.8vw, 3.2rem)" }}>
-            Why clients choose us <em>over the alternatives.</em>
-          </h2>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="border border-white/[0.06] overflow-hidden"
+          WHY CHOOSE US
+        </p>
+        <h2
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2rem, 4vw, 3.2rem)",
+            color: "#1c1c1c",
+            marginBottom: 8,
+            lineHeight: 1.05,
+          }}
         >
-          {/* Header row */}
-          <div className="grid grid-cols-[1fr_120px_140px] bg-[#1A1A1A]">
-            <div className="py-4 px-6" />
-            <div className="py-4 px-4 border-l border-white/[0.06] text-center">
-              <span className="font-[family-name:var(--font-body)] text-[10px] text-[#4a4a4a] tracking-[0.22em] uppercase">Others</span>
+          The Mail Mosaic Difference
+        </h2>
+        <p
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 400,
+            fontSize: 16,
+            color: "#666",
+            marginBottom: 40,
+          }}
+        >
+          What makes us unique:
+        </p>
+
+        {/* Comparison table */}
+        <div
+          style={{
+            border: "1px solid #d7d0c8",
+            borderRadius: 8,
+            overflow: "hidden",
+          }}
+        >
+          {/* Table header */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              background: "#f0ede8",
+              borderBottom: "1px solid #d7d0c8",
+            }}
+          >
+            <div
+              style={{
+                padding: "14px 24px",
+                fontFamily: "var(--font-body)",
+                fontWeight: 600,
+                fontSize: 13,
+                color: "#666",
+                borderRight: "1px solid #d7d0c8",
+              }}
+            >
+              Other Agencies
             </div>
-            <div className="py-4 px-4 border-l border-white/[0.06] bg-[rgba(201,165,90,0.05)] text-center">
-              <span className="font-[family-name:var(--font-body)] text-[10px] text-[#C9A55A] tracking-[0.22em] uppercase">Luca Agency</span>
+            <div
+              style={{
+                padding: "14px 24px",
+                fontFamily: "var(--font-body)",
+                fontWeight: 600,
+                fontSize: 13,
+                color: "#1c1c1c",
+              }}
+            >
+              Mail Mosaic
             </div>
           </div>
 
+          {/* Rows */}
           {rows.map((row, i) => (
-            <motion.div
-              key={row}
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
-              className="grid grid-cols-[1fr_120px_140px] border-t border-white/[0.06] hover:bg-[#1A1A1A] transition-colors"
+            <div
+              key={i}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                borderBottom: i < rows.length - 1 ? "1px solid #d7d0c8" : "none",
+                background: i % 2 === 0 ? "#fff" : "#faf9f7",
+              }}
             >
-              <div className="py-4 px-6">
-                <span className="font-[family-name:var(--font-body)] text-sm text-[#6B6B6B]">{row}</span>
+              <div
+                style={{
+                  padding: "18px 24px",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 400,
+                  fontSize: 14,
+                  color: "#888",
+                  borderRight: "1px solid #d7d0c8",
+                  lineHeight: 1.5,
+                }}
+              >
+                {row.other}
               </div>
-              <div className="py-4 px-4 border-l border-white/[0.06] flex items-center justify-center">
-                <span className="text-[#333333]">✕</span>
+              <div
+                style={{
+                  padding: "18px 24px",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  color: "#1c1c1c",
+                  lineHeight: 1.5,
+                }}
+              >
+                {row.us}
               </div>
-              <div className="py-4 px-4 border-l border-white/[0.06] bg-[rgba(201,165,90,0.04)] flex items-center justify-center">
-                <span className="text-[#C9A55A] text-sm">✓</span>
-              </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
+        {/* CTA */}
+        <div style={{ textAlign: "center", marginTop: 40 }}>
+          <a
+            href="#contact"
+            style={{
+              display: "inline-block",
+              background: "#000",
+              color: "#fff",
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: 15,
+              padding: "14px 32px",
+              borderRadius: 9999,
+              textDecoration: "none",
+            }}
+          >
+            Book a Consultation Call
+          </a>
+        </div>
       </div>
     </section>
   );

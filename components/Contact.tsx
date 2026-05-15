@@ -1,114 +1,300 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function Contact() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
   const [sent, setSent] = useState(false);
 
   return (
-    <section id="contact" ref={ref} className="py-28 bg-[#0D0D0D]">
-      <div className="max-w-[1100px] mx-auto px-6 lg:px-10">
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
+    <section
+      id="contact"
+      style={{
+        background: "#fff",
+        padding: "80px 0",
+        borderTop: "1px solid #d7d0c8",
+      }}
+    >
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 64,
+            alignItems: "start",
+          }}
+          className="contact-grid"
         >
-          <p className="font-[family-name:var(--font-body)] text-[11px] text-[#6B6B6B] tracking-[0.28em] uppercase mb-4">Get In Touch</p>
-          <h2 className="font-[family-name:var(--font-display)] font-light text-[#EDEDE8] leading-[1.02]"
-            style={{ fontSize: "clamp(2.8rem, 6vw, 5.2rem)" }}>
-            Let&apos;s build<br />something <em className="text-[#C9A55A]">great.</em>
-          </h2>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
-            <p className="font-[family-name:var(--font-body)] text-sm text-[#4a4a4a] leading-relaxed mb-12 max-w-sm">
-              Have a project in mind or just exploring — reach out. We reply within 24 hours.
+          {/* Left */}
+          <div>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 600,
+                fontSize: 11,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#666",
+                marginBottom: 12,
+              }}
+            >
+              GET IN TOUCH
             </p>
-            <div className="space-y-7">
-              <div>
-                <p className="font-[family-name:var(--font-body)] text-[10px] text-[#333333] tracking-[0.28em] uppercase mb-1">Based In</p>
-                <p className="font-[family-name:var(--font-body)] text-sm text-[#6B6B6B]">Boston, MA</p>
-              </div>
-              <div>
-                {/* TODO: Replace with Luca's email */}
-                <p className="font-[family-name:var(--font-body)] text-[10px] text-[#333333] tracking-[0.28em] uppercase mb-1">Email</p>
-                <a href="mailto:hello@lucaagency.com" className="font-[family-name:var(--font-body)] text-sm text-[#6B6B6B] hover:text-[#C9A55A] transition-colors duration-200">
-                  hello@lucaagency.com
-                </a>
-              </div>
-              <div>
-                {/* TODO: Replace with Luca's Instagram */}
-                <p className="font-[family-name:var(--font-body)] text-[10px] text-[#333333] tracking-[0.28em] uppercase mb-1">Instagram</p>
-                <a href="#" className="font-[family-name:var(--font-body)] text-sm text-[#6B6B6B] hover:text-[#C9A55A] transition-colors duration-200">
-                  @lucaagency
-                </a>
-              </div>
-            </div>
-          </motion.div>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2rem, 4vw, 3.4rem)",
+                color: "#1c1c1c",
+                marginBottom: 20,
+                lineHeight: 1.05,
+              }}
+            >
+              Book a Consultation Call
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 400,
+                fontSize: 15,
+                color: "#555",
+                lineHeight: 1.7,
+                marginBottom: 32,
+                maxWidth: 400,
+              }}
+            >
+              Ready to unlock serious email revenue? Book a free consultation call and let&apos;s talk about your brand, your goals, and exactly how Mail Mosaic can help.
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 400,
+                fontSize: 14,
+                color: "#888",
+                lineHeight: 1.6,
+              }}
+            >
+              No pressure. No commitments. Just a real conversation about what&apos;s possible.
+            </p>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          {/* Right — Contact form */}
+          <div>
             {sent ? (
-              <div className="h-full flex items-center">
-                <div>
-                  <p className="font-[family-name:var(--font-display)] text-3xl font-light text-[#EDEDE8] italic mb-2">Got it.</p>
-                  <p className="font-[family-name:var(--font-body)] text-sm text-[#4a4a4a]">We&apos;ll be in touch within 24 hours.</p>
-                </div>
+              <div
+                style={{
+                  padding: 40,
+                  background: "#f9f9f6",
+                  border: "1px solid #d7d0c8",
+                  borderRadius: 8,
+                  textAlign: "center",
+                }}
+              >
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "2rem",
+                    color: "#1c1c1c",
+                    marginBottom: 12,
+                  }}
+                >
+                  Message Sent!
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: 15,
+                    color: "#666",
+                  }}
+                >
+                  We&apos;ll be in touch within 24 hours.
+                </p>
               </div>
             ) : (
-              /* TODO: Wire up to Formspree, Resend, or a Next.js API route */
-              <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="font-[family-name:var(--font-body)] block text-[10px] text-[#333333] tracking-[0.22em] uppercase mb-2">Name</label>
-                    <input type="text" required placeholder="Your name"
-                      className="w-full bg-[#161616] border border-white/[0.06] px-4 py-3 font-[family-name:var(--font-body)] text-sm text-[#EDEDE8] placeholder-[#2a2a2a] focus:outline-none focus:border-[rgba(201,165,90,0.4)] transition-colors" />
-                  </div>
-                  <div>
-                    <label className="font-[family-name:var(--font-body)] block text-[10px] text-[#333333] tracking-[0.22em] uppercase mb-2">Email</label>
-                    <input type="email" required placeholder="you@company.com"
-                      className="w-full bg-[#161616] border border-white/[0.06] px-4 py-3 font-[family-name:var(--font-body)] text-sm text-[#EDEDE8] placeholder-[#2a2a2a] focus:outline-none focus:border-[rgba(201,165,90,0.4)] transition-colors" />
-                  </div>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSent(true);
+                }}
+                style={{ display: "flex", flexDirection: "column", gap: 16 }}
+              >
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontFamily: "var(--font-body)",
+                      fontWeight: 600,
+                      fontSize: 12,
+                      color: "#444",
+                      marginBottom: 6,
+                    }}
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Your name"
+                    style={{
+                      width: "100%",
+                      padding: "12px 16px",
+                      border: "1px solid #d7d0c8",
+                      borderRadius: 6,
+                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      color: "#1c1c1c",
+                      background: "#fff",
+                      outline: "none",
+                    }}
+                  />
                 </div>
                 <div>
-                  <label className="font-[family-name:var(--font-body)] block text-[10px] text-[#333333] tracking-[0.22em] uppercase mb-2">Service</label>
-                  <select className="w-full bg-[#161616] border border-white/[0.06] px-4 py-3 font-[family-name:var(--font-body)] text-sm text-[#4a4a4a] focus:outline-none focus:border-[rgba(201,165,90,0.4)] transition-colors">
-                    <option>Select a service</option>
-                    <option>Video Production</option>
-                    <option>Video Editing</option>
-                    <option>Social Media Management</option>
-                    <option>Full Package</option>
-                    <option>Not sure yet</option>
+                  <label
+                    style={{
+                      display: "block",
+                      fontFamily: "var(--font-body)",
+                      fontWeight: 600,
+                      fontSize: 12,
+                      color: "#444",
+                      marginBottom: 6,
+                    }}
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="you@brand.com"
+                    style={{
+                      width: "100%",
+                      padding: "12px 16px",
+                      border: "1px solid #d7d0c8",
+                      borderRadius: 6,
+                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      color: "#1c1c1c",
+                      background: "#fff",
+                      outline: "none",
+                    }}
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontFamily: "var(--font-body)",
+                      fontWeight: 600,
+                      fontSize: 12,
+                      color: "#444",
+                      marginBottom: 6,
+                    }}
+                  >
+                    Brand / Website
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="yourbrand.com"
+                    style={{
+                      width: "100%",
+                      padding: "12px 16px",
+                      border: "1px solid #d7d0c8",
+                      borderRadius: 6,
+                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      color: "#1c1c1c",
+                      background: "#fff",
+                      outline: "none",
+                    }}
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontFamily: "var(--font-body)",
+                      fontWeight: 600,
+                      fontSize: 12,
+                      color: "#444",
+                      marginBottom: 6,
+                    }}
+                  >
+                    Monthly Revenue (approximate)
+                  </label>
+                  <select
+                    style={{
+                      width: "100%",
+                      padding: "12px 16px",
+                      border: "1px solid #d7d0c8",
+                      borderRadius: 6,
+                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      color: "#555",
+                      background: "#fff",
+                      outline: "none",
+                    }}
+                  >
+                    <option value="">Select range</option>
+                    <option>Under $10K/mo</option>
+                    <option>$10K–$50K/mo</option>
+                    <option>$50K–$200K/mo</option>
+                    <option>$200K+/mo</option>
                   </select>
                 </div>
                 <div>
-                  <label className="font-[family-name:var(--font-body)] block text-[10px] text-[#333333] tracking-[0.22em] uppercase mb-2">Message</label>
-                  <textarea required rows={4} placeholder="Tell us about your project..."
-                    className="w-full bg-[#161616] border border-white/[0.06] px-4 py-3 font-[family-name:var(--font-body)] text-sm text-[#EDEDE8] placeholder-[#2a2a2a] focus:outline-none focus:border-[rgba(201,165,90,0.4)] transition-colors resize-none" />
+                  <label
+                    style={{
+                      display: "block",
+                      fontFamily: "var(--font-body)",
+                      fontWeight: 600,
+                      fontSize: 12,
+                      color: "#444",
+                      marginBottom: 6,
+                    }}
+                  >
+                    Anything else?
+                  </label>
+                  <textarea
+                    rows={4}
+                    placeholder="Tell us a bit about your email program today..."
+                    style={{
+                      width: "100%",
+                      padding: "12px 16px",
+                      border: "1px solid #d7d0c8",
+                      borderRadius: 6,
+                      fontFamily: "var(--font-body)",
+                      fontSize: 15,
+                      color: "#1c1c1c",
+                      background: "#fff",
+                      outline: "none",
+                      resize: "vertical",
+                    }}
+                  />
                 </div>
-                <button type="submit"
-                  className="w-full bg-[#C9A55A] text-[#0D0D0D] font-[family-name:var(--font-body)] text-[11px] tracking-[0.22em] uppercase py-4 hover:bg-[#EDEDE8] transition-colors duration-300">
+                <button
+                  type="submit"
+                  style={{
+                    background: "#000",
+                    color: "#fff",
+                    fontFamily: "var(--font-body)",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    padding: "14px 32px",
+                    borderRadius: 9999,
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
                   Send Message
                 </button>
               </form>
             )}
-          </motion.div>
+          </div>
         </div>
-
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .contact-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
