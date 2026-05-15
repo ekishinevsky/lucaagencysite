@@ -12,98 +12,65 @@ const links = [
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-[#080808]/95 backdrop-blur-md border-b border-[#1e1e1e]"
-            : "bg-transparent"
+          scrolled ? "bg-[#111210]/90 backdrop-blur-lg border-b border-white/[0.05]" : ""
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo — swap text with <img> when logo is ready */}
-          <a href="#" className="text-[#f0f0f0] font-bold text-lg tracking-[0.15em] uppercase">
-            {/* TODO: Replace with <img src="/logo.svg" alt="Agency Logo" className="h-8" /> */}
+        <div className="max-w-6xl mx-auto px-8 h-[70px] flex items-center justify-between">
+          {/* TODO: swap text for <img src="/logo.svg" className="h-7" /> */}
+          <a href="#" className="font-[family-name:var(--font-display)] text-[#E4DDD2] text-xl font-light tracking-[0.2em] uppercase">
             Luca Agency
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {links.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                className="text-sm text-[#888] hover:text-[#f0f0f0] tracking-wide uppercase transition-colors duration-200"
-              >
+              <a key={l.label} href={l.href}
+                className="font-[family-name:var(--font-body)] text-[11px] text-[#5A5754] hover:text-[#E4DDD2] tracking-[0.2em] uppercase transition-colors duration-300">
                 {l.label}
               </a>
             ))}
-          </div>
-
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <a
-              href="#contact"
-              className="text-sm border border-[#ff5c36] text-[#ff5c36] hover:bg-[#ff5c36] hover:text-[#080808] px-5 py-2 rounded-full transition-all duration-200 tracking-wide uppercase"
-            >
+            <a href="#contact"
+              className="font-[family-name:var(--font-body)] text-[11px] tracking-[0.2em] uppercase border border-[rgba(184,150,90,0.4)] text-[#CDB07C] hover:bg-[#CDB07C] hover:text-[#111210] px-6 py-2.5 transition-all duration-300">
               Book a Call
             </a>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden flex flex-col gap-[5px] p-2"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span className={`block w-6 h-[1.5px] bg-[#f0f0f0] transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[6.5px]" : ""}`} />
-            <span className={`block w-6 h-[1.5px] bg-[#f0f0f0] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-[1.5px] bg-[#f0f0f0] transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`} />
+          <button onClick={() => setOpen(!open)} className="md:hidden flex flex-col gap-[5px] p-1" aria-label="Menu">
+            <span className={`block w-5 h-px bg-[#E4DDD2] transition-all duration-300 ${open ? "rotate-45 translate-y-[6px]" : ""}`} />
+            <span className={`block w-5 h-px bg-[#E4DDD2] transition-all duration-300 ${open ? "opacity-0" : ""}`} />
+            <span className={`block w-5 h-px bg-[#E4DDD2] transition-all duration-300 ${open ? "-rotate-45 -translate-y-[6px]" : ""}`} />
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile menu */}
       <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-[#080808]/98 backdrop-blur-xl border-b border-[#1e1e1e] md:hidden"
-          >
-            <div className="px-6 py-6 flex flex-col gap-6">
-              {links.map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-lg text-[#888] hover:text-[#f0f0f0] tracking-wide uppercase transition-colors"
-                >
-                  {l.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setMenuOpen(false)}
-                className="text-sm border border-[#ff5c36] text-[#ff5c36] px-5 py-3 rounded-full text-center tracking-wide uppercase"
-              >
-                Book a Call
+        {open && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-[#0C0D0B]/98 backdrop-blur-xl flex flex-col items-center justify-center gap-10 md:hidden">
+            {links.map((l) => (
+              <a key={l.label} href={l.href} onClick={() => setOpen(false)}
+                className="font-[family-name:var(--font-display)] text-4xl font-light text-[#E4DDD2] tracking-wider italic">
+                {l.label}
               </a>
-            </div>
+            ))}
+            <a href="#contact" onClick={() => setOpen(false)}
+              className="font-[family-name:var(--font-body)] text-xs tracking-[0.2em] uppercase border border-[rgba(184,150,90,0.4)] text-[#CDB07C] px-8 py-3 mt-4">
+              Book a Call
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

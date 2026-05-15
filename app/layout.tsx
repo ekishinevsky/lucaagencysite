@@ -1,28 +1,29 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+});
+
+const jost = Jost({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "Luca Agency — Video Production & Social Media",
-  description:
-    "Boston-based creative agency specializing in video production, editing, and social media management.",
+  title: "Luca Agency — Video & Social Media",
+  description: "Boston-based creative agency. Video production, editing, and social media management.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} h-full`}>
-      <body className="min-h-full bg-[#080808] text-[#f0f0f0] antialiased">
-        {children}
-      </body>
+    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

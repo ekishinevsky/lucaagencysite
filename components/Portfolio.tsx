@@ -1,130 +1,71 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 
 // TODO: Replace src, client, and category with Luca's actual project videos
 const projects = [
-  {
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    client: "[Client Name]",
-    category: "Brand Film",
-    size: "large",
-  },
-  {
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    client: "[Client Name]",
-    category: "Social Media Campaign",
-    size: "small",
-  },
-  {
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    client: "[Client Name]",
-    category: "Product Showcase",
-    size: "small",
-  },
-  {
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    client: "[Client Name]",
-    category: "Video Editing",
-    size: "small",
-  },
-  {
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
-    client: "[Client Name]",
-    category: "Event Coverage",
-    size: "small",
-  },
-  {
-    src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    client: "[Client Name]",
-    category: "Brand Campaign",
-    size: "large",
-  },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", client: "[Client Name]", category: "Brand Film", span: "col-span-2" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", client: "[Client Name]", category: "Social Campaign", span: "col-span-1" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", client: "[Client Name]", category: "Product Showcase", span: "col-span-1" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", client: "[Client Name]", category: "Video Editing", span: "col-span-1" },
+  { src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4", client: "[Client Name]", category: "Event Coverage", span: "col-span-2" },
 ];
 
-function VideoCard({ project, delay }: { project: (typeof projects)[0]; delay: number }) {
+function VideoCard({ p, delay }: { p: typeof projects[0]; delay: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [hovered, setHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setHovered(true);
-    videoRef.current?.play().catch(() => {});
-  };
-
-  const handleMouseLeave = () => {
-    setHovered(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  };
+  const [active, setActive] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay }}
-      className={`group relative overflow-hidden rounded-xl bg-[#101010] cursor-pointer ${
-        project.size === "large" ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
-      }`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={`group relative overflow-hidden bg-[#1C1E1A] aspect-video cursor-pointer ${p.span}`}
+      onMouseEnter={() => { setActive(true); videoRef.current?.play().catch(() => {}); }}
+      onMouseLeave={() => { setActive(false); if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; } }}
     >
       <video
         ref={videoRef}
-        src={project.src}
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        src={p.src}
+        muted loop playsInline preload="metadata"
+        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${active ? "scale-105 opacity-100" : "scale-100 opacity-70"}`}
       />
-
-      {/* Dark overlay — fades on hover */}
-      <div
-        className={`absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-[#080808]/20 to-transparent transition-opacity duration-500 ${
-          hovered ? "opacity-60" : "opacity-100"
-        }`}
-      />
-
-      {/* Project info */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-        <p className="text-[#ff5c36] text-xs tracking-widest uppercase mb-1">{project.category}</p>
-        <p className="text-[#f0f0f0] font-semibold text-lg tracking-tight">{project.client}</p>
+      <div className={`absolute inset-0 bg-gradient-to-t from-[#0C0D0B] via-transparent to-transparent transition-opacity duration-500 ${active ? "opacity-60" : "opacity-100"}`} />
+      <div className={`absolute bottom-0 left-0 right-0 p-6 transition-all duration-400 ${active ? "translate-y-0 opacity-100" : "translate-y-2 opacity-70"}`}>
+        <p className="font-[family-name:var(--font-body)] text-[10px] text-[#CDB07C] tracking-[0.25em] uppercase mb-1">{p.category}</p>
+        <p className="font-[family-name:var(--font-display)] text-lg font-light text-[#E4DDD2]">{p.client}</p>
       </div>
     </motion.div>
   );
 }
 
 export default function Portfolio() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="portfolio" ref={ref} className="py-28 px-6 max-w-7xl mx-auto">
+    <section id="portfolio" className="py-40 max-w-6xl mx-auto px-8">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-        className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.8 }}
+        className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8"
       >
         <div>
-          <p className="text-[#ff5c36] text-xs tracking-[0.3em] uppercase mb-4">Our Work</p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Hover to see<br />it come alive.
+          <p className="font-[family-name:var(--font-body)] text-[11px] text-[#5A5754] tracking-[0.3em] uppercase mb-6">Our Work</p>
+          <h2 className="font-[family-name:var(--font-display)] font-light text-[#E4DDD2] leading-[1.05]"
+            style={{ fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)" }}>
+            Hover to see<br />
+            <em>it come alive.</em>
           </h2>
         </div>
-        <p className="text-[#555] text-sm max-w-xs leading-relaxed">
-          Every project is built around one goal — content that actually moves people to act.
+        <p className="font-[family-name:var(--font-body)] text-sm text-[#5A5754] max-w-[260px] leading-relaxed">
+          Every project built around one goal — content that moves people to act.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {projects.map((p, i) => (
-          <VideoCard key={i} project={p} delay={i * 0.08} />
-        ))}
+      <div className="grid grid-cols-3 gap-3">
+        {projects.map((p, i) => <VideoCard key={i} p={p} delay={i * 0.1} />)}
       </div>
     </section>
   );

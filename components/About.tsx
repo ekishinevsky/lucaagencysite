@@ -5,60 +5,59 @@ import { useRef } from "react";
 
 export default function About() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" ref={ref} className="py-28 bg-[#080808]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Photo placeholder — TODO: Replace with <img src="/luca-photo.jpg" ... /> */}
+    <section id="about" ref={ref} className="py-40 bg-[#0C0D0B]">
+      <div className="max-w-6xl mx-auto px-8">
+        <div className="grid md:grid-cols-2 gap-20 items-center">
+
+          {/* Photo — TODO: Replace with <img src="/luca.jpg" className="w-full h-full object-cover" /> */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7 }}
-            className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#101010] border border-[#1e1e1e]"
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="relative aspect-[3/4] bg-[#1C1E1A] border border-white/[0.07] overflow-hidden"
           >
-            {/* Gradient placeholder for photo */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#111] to-[#0a0a0a]" />
-            <div className="absolute inset-0 flex items-end p-8">
-              <div>
-                {/* TODO: Replace with actual photo and remove placeholder text */}
-                <p className="text-[#333] text-xs tracking-widest uppercase mb-2">Photo Placeholder</p>
-                <p className="text-[#222] text-sm">Replace with Luca's photo</p>
-              </div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1C1E1A] via-[#161714] to-[#0C0D0B]" />
+            <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-[#CDB07C]/30 via-[#CDB07C]/10 to-transparent" />
+            <div className="absolute bottom-8 left-8">
+              {/* TODO: Remove this placeholder text when photo is added */}
+              <p className="font-[family-name:var(--font-body)] text-[10px] text-[#3a3a38] tracking-[0.2em] uppercase">Photo placeholder</p>
             </div>
-            {/* Decorative accent line */}
-            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#ff5c36] via-[#ff5c36]/30 to-transparent" />
           </motion.div>
 
-          {/* Text content */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-[#ff5c36] text-xs tracking-[0.3em] uppercase mb-6">About</p>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 leading-tight">
-              Built in Boston.<br />Built for growth.
-            </h2>
-            {/* TODO: Replace with Luca's actual story */}
-            <p className="text-[#666] text-base leading-relaxed mb-6">
-              [Luca's story goes here — how the agency started, what drives the work, and why Boston is home base. Make it personal and specific.]
+            <p className="font-[family-name:var(--font-body)] text-[11px] text-[#5A5754] tracking-[0.3em] uppercase mb-8">
+              About
             </p>
-            <p className="text-[#666] text-base leading-relaxed mb-10">
-              [A second paragraph about the team's approach, values, or what makes the work different. Keep it genuine and direct — clients connect with real people, not corporate speak.]
+            <h2 className="font-[family-name:var(--font-display)] font-light text-[#E4DDD2] leading-[1.05] mb-10"
+              style={{ fontSize: "clamp(2.2rem, 4vw, 3.4rem)" }}>
+              Built in Boston.<br /><em>Built for growth.</em>
+            </h2>
+
+            {/* TODO: Replace with Luca's actual story */}
+            <p className="font-[family-name:var(--font-body)] text-sm text-[#9A9490] leading-relaxed mb-5">
+              [Luca's story — how the agency started and what drives the work.]
+            </p>
+            <p className="font-[family-name:var(--font-body)] text-sm text-[#9A9490] leading-relaxed mb-14">
+              [What makes the approach different. Keep it genuine and direct.]
             </p>
 
-            <div className="grid grid-cols-3 gap-6 pt-10 border-t border-[#1e1e1e]">
+            <div className="grid grid-cols-3 gap-8 pt-10 border-t border-white/[0.07]">
               {/* TODO: Replace with real stats */}
               {[
-                { num: "[X]+", label: "Brands Grown" },
-                { num: "[X]M+", label: "Views Generated" },
-                { num: "[X]+", label: "Videos Produced" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <p className="text-3xl font-bold text-[#f0f0f0] mb-1">{stat.num}</p>
-                  <p className="text-xs text-[#555] tracking-wide uppercase">{stat.label}</p>
+                { num: "[X]+", label: "Brands" },
+                { num: "[X]M+", label: "Views" },
+                { num: "[X]+", label: "Videos" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <p className="font-[family-name:var(--font-display)] font-light text-[#E4DDD2] text-4xl mb-1">{s.num}</p>
+                  <p className="font-[family-name:var(--font-body)] text-[10px] text-[#5A5754] tracking-[0.25em] uppercase">{s.label}</p>
                 </div>
               ))}
             </div>
