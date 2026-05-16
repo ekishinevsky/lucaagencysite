@@ -38,7 +38,7 @@ export default function Footer() {
             textDecoration: "none",
           }}
         >
-          MAIL MOSAIC
+          LUCA AGENCY
         </a>
 
         {/* Nav links */}
@@ -76,7 +76,7 @@ export default function Footer() {
             color: "#999",
           }}
         >
-          © Copyright 2025 Mail Mosaic
+          © Copyright 2025 Luca Agency — Boston, MA
         </p>
       </div>
     </footer>

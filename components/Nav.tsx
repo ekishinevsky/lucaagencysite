@@ -54,7 +54,7 @@ export default function Nav() {
             textDecoration: "none",
           }}
         >
-          MAIL MOSAIC
+          LUCA AGENCY
         </a>
 
         {/* Desktop links */}
@@ -92,7 +92,7 @@ export default function Nav() {
             whiteSpace: "nowrap",
           }}
         >
-          Book a Consultation Call
+          Book a Discovery Call
         </a>
 
         {/* Mobile hamburger */}
@@ -157,7 +157,7 @@ export default function Nav() {
               textDecoration: "none",
             }}
           >
-            Book a Consultation Call
+            Book a Discovery Call
           </a>
         </div>
       )}

@@ -15,9 +15,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Mail Mosaic — High-Impact Email Marketing",
+  title: "Luca Agency — Video Production & Social Media",
   description:
-    "At Mail Mosaic, we're piecing together your retention revenue through smart, data-driven email marketing.",
+    "Boston-based creative agency specializing in video production, editing, and social media management.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

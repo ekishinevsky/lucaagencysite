@@ -48,7 +48,7 @@ export default function Contact() {
                 lineHeight: 1.05,
               }}
             >
-              Book a Consultation Call
+              Book a Discovery Call
             </h2>
             <p
               style={{
@@ -61,7 +61,7 @@ export default function Contact() {
                 maxWidth: 400,
               }}
             >
-              Ready to unlock serious email revenue? Book a free consultation call and let&apos;s talk about your brand, your goals, and exactly how Mail Mosaic can help.
+              Ready to grow your brand with video content that actually converts? Book a free discovery call and let&apos;s talk about your goals and exactly how Luca Agency can help.
             </p>
             <p
               style={{
