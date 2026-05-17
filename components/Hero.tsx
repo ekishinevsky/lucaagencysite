@@ -1,10 +1,12 @@
 export default function Hero() {
+  // Two copies — animating to -50% always lands at the start of copy 2, seamless loop
   const logos = ["[Logo]", "[Logo]", "[Logo]", "[Logo]", "[Logo]", "[Logo]", "[Logo]", "[Logo]"];
+  const track = [...logos, ...logos];
 
   return (
-    <section style={{ background: "#f9f9f6", padding: "80px 0 64px" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
-
+    <section style={{ background: "#f9f9f6", padding: "80px 0 0" }}>
+      {/* Centered hero content */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", textAlign: "center", paddingBottom: 56 }}>
         <h1 style={{
           fontFamily: "var(--font-display)",
           fontSize: "clamp(2.8rem, 6vw, 5rem)",
@@ -40,42 +42,43 @@ export default function Hero() {
           padding: "14px 32px",
           borderRadius: 9999,
           textDecoration: "none",
-          marginBottom: 56,
         }}>
           Book a Discovery Call
         </a>
+      </div>
 
-        {/* Auto-scrolling trusted by marquee */}
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-          <p style={{
-            fontFamily: "var(--font-body)",
-            fontWeight: 600,
-            fontSize: 12,
-            color: "#666",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-          }}>
-            Trusted by
-          </p>
-          <div style={{ overflow: "hidden", width: "100%", maxWidth: 700 }}>
-            <div className="marquee-track">
-              {[...logos, ...logos].map((logo, i) => (
-                <div key={i} style={{
-                  flexShrink: 0,
-                  width: 120,
-                  height: 44,
-                  background: "#d7d0c8",
-                  borderRadius: 6,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginRight: 16,
-                }}>
-                  {/* TODO: Replace with <img src="/logos/client.svg" /> */}
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "#999" }}>{logo}</span>
-                </div>
-              ))}
-            </div>
+      {/* Full-width trusted by marquee — lives outside the centered container */}
+      <div style={{ borderTop: "1px solid #d7d0c8", borderBottom: "1px solid #d7d0c8", padding: "20px 0", overflow: "hidden", width: "100%" }}>
+        <p style={{
+          fontFamily: "var(--font-body)",
+          fontWeight: 600,
+          fontSize: 11,
+          color: "#aaa",
+          letterSpacing: "0.14em",
+          textTransform: "uppercase",
+          textAlign: "center",
+          marginBottom: 16,
+        }}>
+          Trusted by
+        </p>
+        <div style={{ overflow: "hidden", width: "100%" }}>
+          <div className="marquee-track">
+            {track.map((_, i) => (
+              <div key={i} style={{
+                flexShrink: 0,
+                width: 130,
+                height: 44,
+                background: "#d7d0c8",
+                borderRadius: 6,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: 20,
+              }}>
+                {/* TODO: Replace div with <img src="/logos/client-name.svg" alt="Client" style={{height: 24, opacity: 0.5}} /> */}
+                <span style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "#999" }}>[Logo]</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -84,12 +87,11 @@ export default function Hero() {
         .marquee-track {
           display: flex;
           width: max-content;
-          animation: marquee 18s linear infinite;
+          animation: scroll-left 25s linear infinite;
         }
-        .marquee-track:hover { animation-play-state: paused; }
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
+        @keyframes scroll-left {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
     </section>
