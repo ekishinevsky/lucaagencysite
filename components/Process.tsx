@@ -1,3 +1,5 @@
+import { FlickeringGrid } from "./ui/flickering-grid";
+
 const phases = [
   {
     phase: "Phase 1 — Discover",
@@ -47,8 +49,21 @@ const phases = [
 
 export default function Process() {
   return (
-    <section id="process" style={{ background: "#f9f9f6", padding: "80px 0", borderTop: "1px solid #d7d0c8" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+    <section id="process" style={{ background: "#f9f9f6", padding: "80px 0", borderTop: "1px solid #d7d0c8", position: "relative" }}>
+
+      <FlickeringGrid
+        color="#1c1c1c"
+        maxOpacity={0.10}
+        flickerChance={0.09}
+        squareSize={3}
+        gridGap={7}
+        style={{
+          WebkitMaskImage: "radial-gradient(ellipse 100% 85% at 50% 50%, white 10%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse 100% 85% at 50% 50%, white 10%, transparent 75%)",
+        }}
+      />
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
 
         <p style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#666", marginBottom: 12 }}>
           HOW WE WORK

@@ -11,8 +11,8 @@ export default function Hero() {
       {/* Subtle flickering grid — fades to edges via radial mask */}
       <FlickeringGrid
         color="#1c1c1c"
-        maxOpacity={0.055}
-        flickerChance={0.08}
+        maxOpacity={0.11}
+        flickerChance={0.09}
         squareSize={3}
         gridGap={7}
         style={{

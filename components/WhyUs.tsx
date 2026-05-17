@@ -1,3 +1,5 @@
+import { FlickeringGrid } from "./ui/flickering-grid";
+
 const rows = [
   {
     other: "Generic content that blends into the feed",
@@ -23,8 +25,21 @@ const rows = [
 
 export default function WhyUs() {
   return (
-    <section id="why-us" style={{ background: "#f9f9f6", padding: "80px 0", borderTop: "1px solid #d7d0c8" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+    <section id="why-us" style={{ background: "#f9f9f6", padding: "80px 0", borderTop: "1px solid #d7d0c8", position: "relative" }}>
+
+      <FlickeringGrid
+        color="#1c1c1c"
+        maxOpacity={0.10}
+        flickerChance={0.09}
+        squareSize={3}
+        gridGap={7}
+        style={{
+          WebkitMaskImage: "radial-gradient(ellipse 90% 80% at 50% 50%, white 20%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 90% 80% at 50% 50%, white 20%, transparent 80%)",
+        }}
+      />
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
 
         <p style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#666", marginBottom: 12 }}>
           WHY CHOOSE US

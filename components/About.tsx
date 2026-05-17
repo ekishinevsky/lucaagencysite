@@ -1,7 +1,22 @@
+import { FlickeringGrid } from "./ui/flickering-grid";
+
 export default function About() {
   return (
-    <section id="about" style={{ background: "#fff", padding: "80px 0", borderTop: "1px solid #d7d0c8" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+    <section id="about" style={{ background: "#fff", padding: "80px 0", borderTop: "1px solid #d7d0c8", position: "relative" }}>
+
+      <FlickeringGrid
+        color="#1c1c1c"
+        maxOpacity={0.08}
+        flickerChance={0.09}
+        squareSize={3}
+        gridGap={7}
+        style={{
+          WebkitMaskImage: "radial-gradient(ellipse 85% 90% at 65% 50%, white 15%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse 85% 90% at 65% 50%, white 15%, transparent 75%)",
+        }}
+      />
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="about-grid">
 
           {/* TODO: Replace with Luca's actual photo */}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FlickeringGrid } from "./ui/flickering-grid";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -12,9 +13,21 @@ export default function Contact() {
         background: "#fff",
         padding: "80px 0",
         borderTop: "1px solid #d7d0c8",
+        position: "relative",
       }}
     >
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+      <FlickeringGrid
+        color="#1c1c1c"
+        maxOpacity={0.09}
+        flickerChance={0.09}
+        squareSize={3}
+        gridGap={7}
+        style={{
+          WebkitMaskImage: "radial-gradient(ellipse 80% 85% at 50% 50%, white 15%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse 80% 85% at 50% 50%, white 15%, transparent 75%)",
+        }}
+      />
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
         <div
           style={{
             display: "grid",

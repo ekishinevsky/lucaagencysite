@@ -7,8 +7,8 @@ export default function FitCheck() {
       {/* Subtle flickering grid on dark bg */}
       <FlickeringGrid
         color="#ffffff"
-        maxOpacity={0.045}
-        flickerChance={0.08}
+        maxOpacity={0.09}
+        flickerChance={0.09}
         squareSize={3}
         gridGap={7}
         style={{
