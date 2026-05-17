@@ -64,7 +64,7 @@ export default function Hero() {
       </div>
 
       {/* Full-width trusted by marquee — lives outside the centered container */}
-      <div style={{ borderTop: "1px solid #d7d0c8", borderBottom: "1px solid #d7d0c8", padding: "20px 0", overflow: "hidden", width: "100%", position: "relative", zIndex: 1 }}>
+      <div style={{ padding: "20px 0", width: "100%", position: "relative", zIndex: 1 }}>
         <p style={{
           fontFamily: "var(--font-body)",
           fontWeight: 600,
@@ -77,7 +77,12 @@ export default function Hero() {
         }}>
           Trusted by
         </p>
-        <div style={{ overflow: "hidden", width: "100%" }}>
+        <div style={{
+          overflow: "hidden",
+          width: "100%",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)",
+          maskImage: "linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)",
+        }}>
           <div className="marquee-track">
             {track.map((_, i) => (
               <div key={i} style={{
