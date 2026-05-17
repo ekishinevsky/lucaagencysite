@@ -17,7 +17,7 @@ export default function Hero() {
           marginLeft: "auto",
           marginRight: "auto",
         }}>
-          Most Brands Post Videos. We Build Revenue Engines.
+          Build Your Brand Presence and Increase Your Return on Content
         </h1>
 
         <p style={{
@@ -25,11 +25,11 @@ export default function Hero() {
           fontWeight: 400,
           fontSize: 18,
           color: "#666",
-          maxWidth: 560,
+          maxWidth: 540,
           margin: "0 auto 40px",
           lineHeight: 1.7,
         }}>
-          Stop leaving money on the table with content that doesn&apos;t convert. Luca Agency builds video that grows your following by the tens of thousands and turns every view into a sale — the same strategy behind 30M+ views and $180K from a single campaign.
+          Luca Agency produces video content and manages social media for brands that want to grow their audience and drive real revenue — not just views.
         </p>
 
         <a href="#contact" style={{
