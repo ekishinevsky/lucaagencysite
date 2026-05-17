@@ -17,7 +17,7 @@ export default function Hero() {
           marginLeft: "auto",
           marginRight: "auto",
         }}>
-          Grow Your Brand With Video That Actually Gets Watched
+          Most Brands Post Videos. We Build Revenue Engines.
         </h1>
 
         <p style={{
@@ -25,11 +25,11 @@ export default function Hero() {
           fontWeight: 400,
           fontSize: 18,
           color: "#666",
-          maxWidth: 540,
+          maxWidth: 560,
           margin: "0 auto 40px",
           lineHeight: 1.7,
         }}>
-          Luca Agency is a Boston-based creative studio specializing in video production, editing, and social media management built to grow your audience and turn viewers into customers.
+          Stop leaving money on the table with content that doesn&apos;t convert. Luca Agency builds video that grows your following by the tens of thousands and turns every view into a sale — the same strategy behind 30M+ views and $180K from a single campaign.
         </p>
 
         <a href="#contact" style={{
