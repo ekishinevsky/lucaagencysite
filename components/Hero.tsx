@@ -1,12 +1,28 @@
+import { FlickeringGrid } from "./ui/flickering-grid";
+
 export default function Hero() {
   // Two copies — animating to -50% always lands at the start of copy 2, seamless loop
   const logos = ["[Logo]", "[Logo]", "[Logo]", "[Logo]", "[Logo]", "[Logo]", "[Logo]", "[Logo]"];
   const track = [...logos, ...logos];
 
   return (
-    <section style={{ background: "#f9f9f6", padding: "80px 0 0" }}>
+    <section style={{ background: "#f9f9f6", padding: "80px 0 0", position: "relative" }}>
+
+      {/* Subtle flickering grid — fades to edges via radial mask */}
+      <FlickeringGrid
+        color="#1c1c1c"
+        maxOpacity={0.055}
+        flickerChance={0.08}
+        squareSize={3}
+        gridGap={7}
+        style={{
+          WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 40%, white 20%, transparent 80%)",
+          maskImage: "radial-gradient(ellipse 80% 70% at 50% 40%, white 20%, transparent 80%)",
+        }}
+      />
+
       {/* Centered hero content */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", textAlign: "center", paddingBottom: 56 }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", textAlign: "center", paddingBottom: 56, position: "relative", zIndex: 1 }}>
         <h1 style={{
           fontFamily: "var(--font-display)",
           fontSize: "clamp(2.8rem, 6vw, 5rem)",
@@ -48,7 +64,7 @@ export default function Hero() {
       </div>
 
       {/* Full-width trusted by marquee — lives outside the centered container */}
-      <div style={{ borderTop: "1px solid #d7d0c8", borderBottom: "1px solid #d7d0c8", padding: "20px 0", overflow: "hidden", width: "100%" }}>
+      <div style={{ borderTop: "1px solid #d7d0c8", borderBottom: "1px solid #d7d0c8", padding: "20px 0", overflow: "hidden", width: "100%", position: "relative", zIndex: 1 }}>
         <p style={{
           fontFamily: "var(--font-body)",
           fontWeight: 600,

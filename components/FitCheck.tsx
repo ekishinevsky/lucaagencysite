@@ -1,7 +1,23 @@
+import { FlickeringGrid } from "./ui/flickering-grid";
+
 export default function FitCheck() {
   return (
-    <section id="fit" style={{ background: "#1c1c1c", padding: "80px 0" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
+    <section id="fit" style={{ background: "#1c1c1c", padding: "80px 0", position: "relative" }}>
+
+      {/* Subtle flickering grid on dark bg */}
+      <FlickeringGrid
+        color="#ffffff"
+        maxOpacity={0.045}
+        flickerChance={0.08}
+        squareSize={3}
+        gridGap={7}
+        style={{
+          WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, white 10%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, white 10%, transparent 75%)",
+        }}
+      />
+
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", textAlign: "center", position: "relative", zIndex: 1 }}>
         <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 4vw, 3.4rem)", color: "#fff", marginBottom: 16, lineHeight: 1.05 }}>
           Ready to grow your brand with video?
         </h2>
