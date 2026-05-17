@@ -79,9 +79,10 @@ export default function Hero() {
         </p>
         <div style={{
           overflow: "hidden",
-          width: "100%",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)",
-          maskImage: "linear-gradient(to right, transparent 0%, white 12%, white 88%, transparent 100%)",
+          width: "60%",
+          margin: "0 auto",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, white 15%, white 85%, transparent 100%)",
+          maskImage: "linear-gradient(to right, transparent 0%, white 15%, white 85%, transparent 100%)",
         }}>
           <div className="marquee-track">
             {track.map((_, i) => (
